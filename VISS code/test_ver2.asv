@@ -1,0 +1,28 @@
+Img = imread("Icon_Bird.png");
+%Final_ID = [1 9 6];
+Final_ID = ["ffffdeff94fdfefbfffffbdfa1878ca10100a527eb0f20000000087a000000001",
+            "ffffdfffd6fedffffffffbffa887ec8101052f27ad0da00000008802080000209",
+            "fffffefd56ebffffffffffffab876e3304002d27a925218000000a6a0a2000086"]
+k = 3;
+
+for i=1:k
+    fid = fopen('verfile.txt');
+    while ~feof(fid)
+        tline = fgetl(fid);
+        newStr = extractBefore(tline,',');
+        cmp1 = strcmp(newStr,Final_ID(i));
+        if (cmp1 == 1)
+            %fprintf("matched");
+            nstr = extractAfter(tline,',')
+            hash_val = imgver(Img,Final_ID(i))
+            cmp2 = strcmp(nstr,hash_val);
+            if ( cmp2 == 0)
+                fprintf("Cheating Detected");
+                return
+            end
+        end   
+    end
+    fclose(fid);
+ end
+ fprintf("Accurate Secret \n");
+

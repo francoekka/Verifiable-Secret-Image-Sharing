@@ -1,0 +1,22 @@
+Img = imread("lena8.png");
+ID = [1 9 6 5 2];
+n = 5;
+fid = fopen('verfile.txt','w');
+
+for i=1:n
+ fprintf(fid,'%d',ID(i));
+ fprintf(fid,"\t");
+ v = imgver(Img,ID(i));
+ fprintf(fid,v);
+ fprintf(fid,"\n");
+end
+
+k=3
+verID=[1 9 6];
+for i=1:k
+    f = fopen('verfile.txt','r');
+    data = fscanf(f,'%s %*s' );
+    data
+    if data== verID(i)
+    f = fclose(f);
+end
